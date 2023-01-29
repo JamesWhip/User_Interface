@@ -12,12 +12,16 @@ io.on('connection', function (socket) {
     console.log(`connected ${name}`)
 
     if (name == "video") {
-      socket.on('data', function (data) {                     // listen on client emit 'data'
+      socket.on('data1', function (data) {                     // listen on client emit 'data'
         const imgElem1 = document.getElementById("camera1")
-        const imgElem2 = document.getElementById("camera2")
-        const imgElem3 = document.getElementById("camera3")
         imgElem1.src = `data:image/jpeg;base64,${data}`
+      })
+      socket.on('data2', function (data) {                     // listen on client emit 'data'
+        const imgElem2 = document.getElementById("camera2")
         imgElem2.src = `data:image/jpeg;base64,${data}`
+      })
+      socket.on('data3', function (data) {                     // listen on client emit 'data'
+        const imgElem3 = document.getElementById("camera3")
         imgElem3.src = `data:image/jpeg;base64,${data}`
       })
     }
