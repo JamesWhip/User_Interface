@@ -11,9 +11,15 @@ connected = False
 
 
 def startTransmission(camIndex, camName):
-    print("Starting video transmission: " + camName)
     cam = cv2.VideoCapture(camIndex)
-    while (connected):
+    
+    if (not cam.isOpened()):
+        print("Cannot open camera: " + camName)
+        return
+    
+    print("Starting video transmission: " + camName)
+
+    while (connected & cam.isOpened()):
         ret, frame = cam.read()                     # get frame from webcam
         # from image to binary buffer
         res, frame = cv2.imencode('.jpg', frame)
@@ -32,9 +38,9 @@ def connect():
     sio.emit('name', b'video')
     print("I'm connected!")
 
-    cam0 = threading.Thread(target=startTransmission, args=(0, "data1"))
-    cam1 = threading.Thread(target=startTransmission, args=(1, "data2"))
-    cam2 = threading.Thread(target=startTransmission, args=(2, "data3"))
+    cam0 = threading.Thread(target=startTransmission, args=(0, "data0"))
+    cam1 = threading.Thread(target=startTransmission, args=(1, "data1"))
+    cam2 = threading.Thread(target=startTransmission, args=(2, "data2"))
 
     cam0.start()
     cam1.start()

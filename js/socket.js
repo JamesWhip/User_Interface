@@ -12,17 +12,17 @@ io.on('connection', function (socket) {
     console.log(`connected ${name}`)
 
     if (name == "video") {
+      socket.on('data0', function (data) {                     // listen on client emit 'data0'
+        const IMAGE_ELEMENT = document.getElementById("camera1")
+        IMAGE_ELEMENT.src = `data:image/jpeg;base64,${data}`
+      })
       socket.on('data1', function (data) {                     // listen on client emit 'data1'
-        const imgElem1 = document.getElementById("camera1")
-        imgElem1.src = `data:image/jpeg;base64,${data}`
+        const IMAGE_ELEMENT = document.getElementById("camera2")
+        IMAGE_ELEMENT.src = `data:image/jpeg;base64,${data}`
       })
       socket.on('data2', function (data) {                     // listen on client emit 'data2'
-        const imgElem2 = document.getElementById("camera2")
-        imgElem2.src = `data:image/jpeg;base64,${data}`
-      })
-      socket.on('data3', function (data) {                     // listen on client emit 'data3'
-        const imgElem3 = document.getElementById("camera3")
-        imgElem3.src = `data:image/jpeg;base64,${data}`
+        const IMAGE_ELEMENT = document.getElementById("camera3")
+        IMAGE_ELEMENT.src = `data:image/jpeg;base64,${data}`
       })
     }
     if (name === "telemetry") {
