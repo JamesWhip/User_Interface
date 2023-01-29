@@ -34,9 +34,11 @@ def connect():
 
     cam0 = threading.Thread(target=startTransmission, args=(0, "data1"))
     cam1 = threading.Thread(target=startTransmission, args=(1, "data2"))
+    cam2 = threading.Thread(target=startTransmission, args=(2, "data3"))
 
     cam0.start()
     cam1.start()
+    cam2.start()
 
 
 @sio.event
